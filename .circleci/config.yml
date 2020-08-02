@@ -27,6 +27,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn
