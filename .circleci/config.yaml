@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: node:12
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+          name: Lint
+          command: yarn run lint
+      - run:
+          name: Test Coverage
+          command: yarn run coverage
+
+workflows:
+  version: 2
+  test-wf:
+    jobs:
+      - test

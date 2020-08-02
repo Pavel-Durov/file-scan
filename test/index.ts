@@ -1,7 +1,7 @@
-import test from 'ava';
+import test from "ava";
 
-const fn = () => 'foo';
+const fn = () => "foo";
 
-test('fn() returns foo', t => {
-	t.is(fn(), 'foo');
+test("fn() returns foo", (t) => {
+  t.is(fn(), "foo");
 });
