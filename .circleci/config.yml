@@ -41,7 +41,6 @@ workflows:
   test-wf:
     jobs:
       - test
-
   deploy-wf:
     jobs:
       - test:
