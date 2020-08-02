@@ -16,18 +16,23 @@ jobs:
           command: yarn test
 
 workflows:
-  version: 2.1
+  version: 2
   test-wf:
     jobs:
       - test
 
-  deploy-wf:    
+  dev_build_test_deploy:
     jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - develop
+
       - build_deploy:
-        requires:
-          - test
-        filters:
-          branches:
-            only:
-              - develop
-              - master      
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - develop    
