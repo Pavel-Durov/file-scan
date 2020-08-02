@@ -20,3 +20,10 @@ workflows:
   test-wf:
     jobs:
       - test
+      - build_deploy:
+        requires:
+          - test
+        filters:
+          branches:
+            only:
+              - develop      
