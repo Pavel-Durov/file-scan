@@ -31,7 +31,7 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
-          name: Authenticate with registry
+          name: Authenticate with NPM
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc    
       - run:
           name: build_deploy
