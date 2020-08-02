@@ -40,14 +40,15 @@ workflows:
   version: 2
   test-wf:
     jobs:
-      - test:
-        filters:
-          branches:
-            ignore: /(develop|master)/  
+      - test
 
   deploy-wf:
     jobs:
       - test:
+          filters:
+            branches:
+              only:
+                - develop
       - deploy:
           requires:
             - test
