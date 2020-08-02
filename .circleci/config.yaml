@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: node:12
+      - image: node:12.15-slim
     steps:
       - checkout
       - run:
@@ -16,7 +16,7 @@ jobs:
           command: yarn test
 
 workflows:
-  version: 2.1
+  version: 2
   test-wf:
     jobs:
       - test  
