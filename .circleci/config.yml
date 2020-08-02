@@ -1,8 +1,13 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.16
+
 jobs:
   test:
-    docker:
-      - image: circleci/node:12.16
+    <<: *defaults
     steps:
       - checkout
       - run:
@@ -14,11 +19,18 @@ jobs:
       - run:
           name: Test Coverage
           command: yarn test
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
   deploy:
-    docker:
-      - image: circleci/node:12.16
+    <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "yarn.lock" }}
+        - v1-dependencies-
       - run:
           name: Install Dependencies
           command: yarn
