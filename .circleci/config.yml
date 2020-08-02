@@ -44,9 +44,9 @@ workflows:
   test-wf:
     jobs:
       - test:
-        filters:
-          branches:
-            ignore: /develop|master/
+          filters:
+            branches:
+              ignore: /develop|master/
   deploy-wf:
     jobs:
       - test:
