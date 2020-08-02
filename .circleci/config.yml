@@ -31,7 +31,7 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
-          name: Authenticate with NPM
+          name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc    
       - run:
           name: build_deploy
@@ -40,7 +40,10 @@ workflows:
   version: 2
   test-wf:
     jobs:
-      - test
+      - test:
+        filters:
+          branches:
+            ignore: /(develop|master)/  
 
   deploy-wf:
     jobs:
