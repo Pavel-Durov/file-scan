@@ -1,15 +1,15 @@
 {
-  "name": "file-scan",
+  "name": "@ihcmikmai/file-scan",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "scan text files for patterns",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
     "build": "rimraf lib && tsc --module commonjs",
     "test": "ava ./test/**"
   },
-  "author": "",
+  "author": "Pavel-Durov",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^14.0.27",
@@ -38,8 +38,25 @@
       "ts"
     ],
     "require": [
-			"ts-node/register",
-			"tsconfig-paths/register"
-		]
-  }
+      "ts-node/register",
+      "tsconfig-paths/register"
+    ]
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pavel-Durov/file-scan.git"
+  },
+  "keywords": [
+    "files",
+    "scan",
+    "glob",
+    "regex"
+  ],
+  "bugs": {
+    "url": "https://github.com/Pavel-Durov/file-scan/issues"
+  },
+  "homepage": "https://github.com/Pavel-Durov/file-scan#readme"
 }
