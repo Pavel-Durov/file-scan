@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   test:
     docker:
@@ -10,13 +10,13 @@ jobs:
           command: yarn
       - run:
           name: Lint
-          command: yarn run lint
+          command: yarn lint
       - run:
           name: Test Coverage
-          command: yarn run coverage
+          command: yarn test
 
 workflows:
-  version: 2
+  version: 2a
   test-wf:
     jobs:
-      - test
+      - test  
