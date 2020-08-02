@@ -23,8 +23,8 @@ jobs:
           name: Install Dependencies
           command: yarn
       - run:
-        name: build_deploy
-        command: echo NOT DEFINED YET
+          name: build_deploy
+          command: echo NOT DEFINED YET
 workflows:
   version: 2
   test-wf:
