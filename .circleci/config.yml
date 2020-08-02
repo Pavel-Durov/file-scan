@@ -14,7 +14,17 @@ jobs:
       - run:
           name: Test Coverage
           command: yarn test
-
+  test:
+    docker:
+      - image: circleci/node:12.16
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+        name: build_deploy
+        command: echo NOT DEFINED YET
 workflows:
   version: 2
   test-wf:
