@@ -67,7 +67,7 @@ async function processFile(
   return result;
 }
 
-async function main() {
+async function main(): Promise<void> {
   const args = parseArgs(cliArgs);
   log(main.name, args.files);
   const promises = args.files.map((f) => processFile(args.pattern, f));
