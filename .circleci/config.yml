@@ -43,7 +43,10 @@ workflows:
   version: 2
   test-wf:
     jobs:
-      - test
+      - test:
+        filters:
+          branches:
+            ignore: /develop|master/
   deploy-wf:
     jobs:
       - test:
