@@ -1,8 +1,8 @@
-version: 2.1
+version: 2
 jobs:
   test:
     docker:
-      - image: node:12.15-slim
+      - image: circleci/node:12.15-slim
     steps:
       - checkout
       - run:
@@ -19,4 +19,4 @@ workflows:
   version: 2
   test-wf:
     jobs:
-      - test  
+      - test

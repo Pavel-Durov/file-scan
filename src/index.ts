@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { readFile, statSync } from "fs";
 import * as cliArgs from "yargs";
 import { promisify } from "util";

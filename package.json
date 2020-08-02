@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "scan text files for patterns",
   "main": "dist/index.js",
+  "bin": "dist/index.js",
   "scripts": {
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
