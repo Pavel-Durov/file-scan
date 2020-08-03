@@ -46,18 +46,19 @@ workflows:
       - test:
           filters:
             branches:
-              ignore: /develop|master/
+              ignore: /master/
+
   deploy-wf:
     jobs:
       - test:
           filters:
             branches:
               only:
-                - develop
+                - master
       - deploy:
           requires:
             - test
           filters:
             branches:
               only:
-                - develop    
+                - master    
