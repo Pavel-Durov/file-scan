@@ -1,34 +1,22 @@
 #!/usr/bin/env node
 
 import { readFile, statSync } from "fs";
-import * as cliArgs from "yargs";
-import { promisify } from "util";
-import debug from "debug";
 
-const log = debug("index");
+import { promisify } from "util";
+
+import { parseArgs } from "./cli";
+import { initLog } from "./log";
+
+const log = initLog('main');
 
 const readFileAsync = promisify(readFile);
 
-interface Config {
-  pattern: RegExp;
-  files: string[];
-}
 interface Match {
   file: string;
   lineNumber: number;
   line: string;
 }
 
-function parseArgs(arg: cliArgs.Argv): Config {
-  if (!arg.argv.pattern) {
-    throw new Error("pattern not defined");
-  }
-  const pattern = new RegExp(arg.argv.pattern as string);
-  return {
-    pattern,
-    files: arg.argv._ as string[],
-  };
-}
 
 function constructMatch(
   file: string,
@@ -68,7 +56,7 @@ async function processFile(
 }
 
 async function main(): Promise<void> {
-  const args = parseArgs(cliArgs);
+  const args = parseArgs();
   log(main.name, args.files);
   const promises = args.files.map((f) => processFile(args.pattern, f));
   const matches = await Promise.all(promises);
