@@ -1,5 +1,5 @@
 import * as cliArgs from "yargs";
-import { initLog } from "src/log";
+import { initLog } from "./log";
 
 const log = initLog("cli");
 

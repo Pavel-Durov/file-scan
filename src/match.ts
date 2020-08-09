@@ -1,5 +1,5 @@
-import { initLog } from "src/log";
-import { Config } from "src/cli";
+import { initLog } from "./log";
+import { Config } from "./cli";
 import { readFileAsync, isFile } from "./fs";
 
 const log = initLog("main");
