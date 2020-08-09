@@ -1,0 +1,64 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.16
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Test Coverage
+          command: yarn test
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: building package
+          command: yarn build
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc    
+      - run:
+          name: build_deploy
+          command: npm publish --access public --tag beta
+workflows:
+  version: 2
+  test-wf:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /master/
+
+  deploy-wf:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master    
