@@ -37,7 +37,6 @@ async function matchPattern(
   let result = null;
   const content = (await readFileAsync(file)).toString();
   const match = content.match(pattern);
-  log(matchPattern.name, { file, pattern, match, content });
   if (match) {
     result = constructMatch(file, pattern, content);
   }
