@@ -1,5 +1,5 @@
-import debug from 'debug';
-import { FILE_SCAN_DEBUG } from './config';
+import debug from "debug";
+import { FILE_SCAN_DEBUG } from "./config";
 
 debug.enable(FILE_SCAN_DEBUG);
 

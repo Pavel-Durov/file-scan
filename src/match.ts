@@ -1,5 +1,5 @@
-import { initLog } from "./log";
-import { Config } from "./cli";
+import { initLog } from "src/log";
+import { Config } from "src/cli";
 import { readFileAsync, isFile } from "./fs";
 
 const log = initLog("main");
@@ -29,6 +29,20 @@ function constructMatch(
   }
   return result;
 }
+async function matchPattern(
+  file: string,
+  pattern: RegExp
+): Promise<Match | null> {
+  log(matchPattern.name, { file, pattern });
+  let result = null;
+  const content = (await readFileAsync(file)).toString();
+  const match = content.match(pattern);
+  log(matchPattern.name, { file, pattern, match, content });
+  if (match) {
+    result = constructMatch(file, pattern, content);
+  }
+  return result;
+}
 
 async function processFile(
   pattern: RegExp,
@@ -36,12 +50,12 @@ async function processFile(
 ): Promise<Match | null> {
   log(processFile.name, { file, pattern });
   let result = null;
-  if (isFile(file)) {
-    const content = (await readFileAsync(file)).toString();
-    const match = content.match(pattern);
-    if (match) {
-      result = constructMatch(file, pattern, content);
+  try {
+    if (isFile(file)) {
+      result = matchPattern(file, pattern);
     }
+  } catch (e) {
+    log(processFile.name, e);
   }
   return result;
 }

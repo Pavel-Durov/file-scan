@@ -7,10 +7,13 @@
     "file-scan": "dist/index.js"
   },
   "scripts": {
+    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
+    "start:verbose": "FILE_SCAN_DEBUG=* yarn start",
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
     "build": "rimraf lib && tsc --module commonjs",
-    "test": "ava ./test/**"
+    "test": "ava ./test/**",
+    "test:verbose": "FILE_SCAN_DEBUG=* yarn test"
   },
   "author": "Pavel-Durov",
   "license": "ISC",

@@ -13,10 +13,11 @@ test.before(() => {
   stub(fs, "isFile").resolves(true);
   readFileAsyncStub = stub(fs, "readFileAsync");
 });
+
 test.serial("expected to match last line", async (t) => {
   readFileAsyncStub.reset();
   readFileAsyncStub
-    .resolves("?")
+    .resolves("some dummy text")
     .withArgs(expectedFileName)
     .resolves(`line 1\nline 2\n${expectedLine}`);
   const result = await matchModule.match({
@@ -50,7 +51,6 @@ test.serial("expected to match first line", async (t) => {
     },
   ]);
 });
-
 
 test.serial("expected to match middle line", async (t) => {
   readFileAsyncStub.reset();
