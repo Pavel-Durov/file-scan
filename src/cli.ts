@@ -22,7 +22,7 @@ export function parseArgs(): Config | null {
     log(parseArgs.name, { pattern: program.pattern });
     const pattern = new RegExp(program.pattern as string);
     config = {
-      pattern, 
+      pattern,
       files: program.args,
     };
   } else {
