@@ -32,11 +32,13 @@ jobs:
           - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc    
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/dist/.npmrc    
+      - run: 
+          name: build
+          command: yarn build
       - run:
-          name: build_deploy
+          name: npm publish
           command: |
-            yarn build
             cd dist
             npm publish --access public
 workflows:
