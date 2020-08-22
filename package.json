@@ -1,22 +1,26 @@
 {
   "name": "@ihcmikmai/file-scan",
-  "version": "0.3.1",
+  "version": "0.4.2",
   "description": "scan text files for patterns",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "bin": {
-    "file-scan": "dist/index.js"
+    "file-scan": "src/index.js"
+  },
+  "engines": {
+    "node": "node >= 12.16.3",
+    "yarn": "yarn >=1.22.4"
   },
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
     "start:verbose": "FILE_SCAN_DEBUG=* yarn start",
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
-    "build": "rimraf lib && tsc --module commonjs",
-    "test": "ava ./test/**",
+    "build": "rimraf dist && tsc --module commonjs",
+    "test": "ava",
     "test:verbose": "FILE_SCAN_DEBUG=* yarn test"
   },
   "author": "Pavel-Durov",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.0.27",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
@@ -35,6 +39,7 @@
     "@types/sinon": "^9.0.4",
     "@types/yargs": "^15.0.5",
     "ava": "^3.11.0",
+    "commander": "^6.0.0",
     "debug": "^4.1.1",
     "prettier": "^2.0.5",
     "ramda": "^0.27.1",
@@ -43,6 +48,7 @@
     "yargs": "^15.4.1"
   },
   "ava": {
+    "failFast": true,
     "verbose": true,
     "extensions": [
       "ts"
