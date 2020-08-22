@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "moduleResolution": "node",
     "target": "es6",
@@ -15,6 +16,5 @@
     "types": ["node"],
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["src"],
   "exclude": ["**/*.spec.ts"]
 }

@@ -25,6 +25,17 @@ yarn add @ihcmikmai/file-scan --dev
 
 ## Examples
 
+```
+
+$ file-scan -h
+Usage: index [options]
+
+Options:
+  -V, --version          output the version number
+  -P, --pattern <regex>  regex pattern
+  -h, --help             display help for command
+
+```
 Scan all files in 2 level directories, ignoring node_modules directory
 ```bash
 $ file-scan ./*[!node_modules]**/** --pattern=secret
@@ -32,9 +43,9 @@ $ file-scan ./*[!node_modules]**/** --pattern=secret
 
 + if your regex include `\` escape them with `\\` : 
 ```bash
- --pattern="secret-\d+"
+ --pattern "secret-\d+"
  # should be
- --pattern="secret-\\d+"
+ --pattern "secret-\\d+"
 ```
 
 
@@ -52,12 +63,6 @@ yarn test:verbose
 
 ## Logs
 
-via `.bin/file-scan` link: 
 ```bash
 FILE_SCAN_DEBUG=* file-scan
-```
-
-via `yarn start`
-```bash
-FILE_SCAN_DEBUG=* yarn start
 ```
