@@ -47,6 +47,17 @@ $ file-scan ./*[!node_modules]**/** --pattern secret
  --pattern "secret-\\d+"
 ```
 
+## Use file-scan as pre-commit hook
+configure precommit, in this example we'll use [husky](https://github.com/typicode/husky):
+
+``
+  "husky": {
+    "hooks": {
+      "pre-commit": "file-scan -p apikey-1234567890 ./**/**"
+    }
+  }
+``
+> Your commits will be declined by pre-commit hook if any secrets found
 
 ## Tests
 
