@@ -15,13 +15,15 @@
     "start:verbose": "FILE_SCAN_DEBUG=* yarn start",
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
-    "build": "rimraf dist && tsc --module commonjs",
+    "build": "rimraf dist && tsc --module commonjs && cp ./README.md ./dist",
     "test": "ava",
     "test:verbose": "FILE_SCAN_DEBUG=* yarn test"
   },
   "author": "Pavel-Durov",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "9.1.1",
+    "@commitlint/config-conventional": "9.1.1",
     "@types/node": "^14.0.27",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
@@ -41,6 +43,7 @@
     "ava": "^3.11.0",
     "commander": "^6.0.0",
     "debug": "^4.1.1",
+    "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "ramda": "^0.27.1",
     "sinon": "^9.0.2",
@@ -61,6 +64,11 @@
       "ts-node/register",
       "tsconfig-paths/register"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "directories": {
     "test": "test"
