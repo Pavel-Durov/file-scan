@@ -13,21 +13,16 @@ export interface Config {
   files: string[];
 }
 
-export function parseArgs(): Config | null {
+export function parseArgs(): Config {
   log(parseArgs.name);
   program.parse(process.argv);
   let config = null;
-  log(parseArgs.name, program.opts(), { args: program.args });
-  if (program.pattern) {
-    log(parseArgs.name, { pattern: program.pattern });
-    const pattern = new RegExp(program.pattern as string);
-    config = {
-      pattern,
-      files: program.args,
-    };
-  } else {
-    log(parseArgs.name, "pattern not provided");
-  }
+  log(parseArgs.name, { opts: program.opts() });
+  const pattern = new RegExp(program.pattern as string);
+  config = {
+    pattern,
+    files: program.args,
+  };
   log(parseArgs.name, { config });
   return config;
 }
