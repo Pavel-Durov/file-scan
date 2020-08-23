@@ -4,7 +4,7 @@ import { readFileAsync, isFile } from "./fs";
 
 const log = initLog("main");
 
-interface Match {
+export interface Match {
   file: string;
   lineNumber: number;
   line: string;

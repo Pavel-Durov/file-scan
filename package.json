@@ -1,6 +1,6 @@
 {
   "name": "@ihcmikmai/file-scan",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "scan text files for patterns",
   "main": "src/index.js",
   "bin": {
@@ -52,6 +52,10 @@
     "verbose": true,
     "extensions": [
       "ts"
+    ],
+    "files": [
+      "test/**/*",
+      "!test/utils.ts"
     ],
     "require": [
       "ts-node/register",
