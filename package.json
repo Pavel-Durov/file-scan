@@ -1,6 +1,6 @@
 {
   "name": "@ihcmikmai/file-scan",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "scan text files for patterns",
   "main": "src/index.js",
   "bin": {
