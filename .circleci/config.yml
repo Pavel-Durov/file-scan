@@ -39,7 +39,6 @@ jobs:
       - run:
           name: npm publish
           command: |
-            cp ./README.md ./dist/
             cd dist
             npm publish --access public
 workflows:
