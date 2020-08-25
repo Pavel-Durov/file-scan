@@ -1,29 +1,13 @@
-#!/usr/bin/env node
-
-import { parseArgs } from "./cli";
+import { Config, Match, processFile } from "./match";
 import { initLog } from "./log";
-import { match, Match } from "./match";
-import { isEmpty } from "ramda";
-import { PROC_EXIST_ERROR_CODE, PROC_EXIST_SUCCESS_CODE } from "./const";
 
 const log = initLog("main");
 
-function existMatchFound(match: Match[]) {
-  for (const { file, lineNumber, line } of match) {
-    console.log(`${file} - [${lineNumber}] "${line}"`);
-  }
-  process.exit(PROC_EXIST_ERROR_CODE);
-}
-async function main() {
-  log(main.name);
-  const args = parseArgs();
-  log(main.name, { args });
-  const result = await match(args);
-  if (isEmpty(result)) {
-    process.exit(PROC_EXIST_SUCCESS_CODE);
-  } else {
-    existMatchFound(result);
-  }
-}
+export { Config, Match };
 
-main();
+export async function scan(config: Config): Promise<Match[]> {
+  log(scan.name, config.files);
+  const promises = config.files.map((f) => processFile(config.pattern, f));
+  const matches = await Promise.all(promises);
+  return matches.filter((m) => m) as Match[];
+}

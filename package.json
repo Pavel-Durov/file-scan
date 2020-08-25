@@ -4,7 +4,7 @@
   "description": "scan text files for patterns",
   "main": "src/index.js",
   "bin": {
-    "file-scan": "src/index.js"
+    "file-scan": "src/cli.js"
   },
   "engines": {
     "node": "node >= 12.16.3",

@@ -1,17 +1,16 @@
+#!/usr/bin/env node
+
 import { initLog } from "./log";
 import { Command } from "commander";
 import * as pkg from "../package.json";
+import { Config } from "./match";
+import { scan } from "./";
 
 const log = initLog("cli");
 const program = new Command();
 
 program.version(pkg.version);
 program.option("-p, --pattern <regex>", "regex pattern");
-
-export interface Config {
-  pattern: RegExp;
-  files: string[];
-}
 
 export function parseArgs(): Config {
   log(parseArgs.name);
@@ -26,3 +25,5 @@ export function parseArgs(): Config {
   log(parseArgs.name, { config });
   return config;
 }
+
+scan(parseArgs());
