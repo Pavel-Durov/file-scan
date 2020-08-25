@@ -1,6 +1,6 @@
 {
   "name": "@ihcmikmai/file-scan",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "scan text files for patterns",
   "main": "src/index.js",
   "bin": {
@@ -11,11 +11,11 @@
     "yarn": "yarn >=1.22.4"
   },
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register ./src/index.ts",
+    "start": "ts-node -r tsconfig-paths/register ./src/cli.ts",
     "start:verbose": "FILE_SCAN_DEBUG=* yarn start",
     "lint": "eslint '*/**/*.{js,ts}'",
     "lint:fix": "yarn lint --quiet --fix",
-    "build": "rimraf dist && tsc --module commonjs && cp ./README.md ./dist",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && cp ./README.md ./dist",
     "test": "ava",
     "test:verbose": "FILE_SCAN_DEBUG=* yarn test"
   },
@@ -43,6 +43,7 @@
     "ava": "^3.11.0",
     "commander": "^6.0.0",
     "debug": "^4.1.1",
+    "glob": "^7.1.6",
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "ramda": "^0.27.1",

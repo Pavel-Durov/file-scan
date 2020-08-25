@@ -47,6 +47,17 @@ $ file-scan ./*[!node_modules]**/** --pattern secret
  --pattern "secret-\\d+"
 ```
 
+## Programmatic
+```javascript
+import { match, scanFiles } from '@ihcmikmai/file-scan';
+
+## scanning via glob pattern
+const results = await scan(/my-regex/, "./**/*.json"
+
+## scanning via list of files
+const results = await scan(/my-regex/, ["./file1.json", "./file2.json"])
+```
+
 ## Use file-scan as pre-commit hook
 configure precommit, in this example we'll use [husky](https://github.com/typicode/husky):
 

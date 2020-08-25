@@ -13,7 +13,7 @@ test("expected to find version in package.json", (t) => {
 });
 
 test("expected to find pattern in ./test/file-samples/*", (t) => {
-  const cmd = `yarn start ./test/file-samples/* --pattern 'L1.F1' `;
+  const cmd = `yarn start ./test/file-samples/* --pattern 'L1.F1'`;
   const assert = (str: string) =>
     /Donec a L1 F1 massa sem/.test(str) && /l1-f1.txt/.test(str);
   assertExec(t, cmd, assert, ERROR);
