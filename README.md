@@ -11,15 +11,10 @@
 
 ## Install
 
-Install with npm:
-
 ```bash
+# npm
 npm install --save-dev @ihcmikmai/file-scan
-```
-
-Install with yarn:
-
-```bash
+# yarn
 yarn add @ihcmikmai/file-scan --dev
 ```
 
@@ -47,17 +42,24 @@ $ file-scan ./*[!node_modules]**/** --pattern secret
  --pattern "secret-\\d+"
 ```
 
-## Use file-scan as pre-commit hook
-configure precommit, in this example we'll use [husky](https://github.com/typicode/husky):
+```javascript
+import { match, scanFiles } from '@ihcmikmai/file-scan';
+// scanning via glob pattern
+const results = await scan(/my-regex/, "./**/*.json");
+// scanning via file list
+const results = await scanFiles(/my-regex/, ["./file1.json", "./file2.json"])
+```
 
-``
+## Use file-scan as pre-commit hook
+configure precommit, this example use [husky](https://github.com/typicode/husky):
+
+```json
   "husky": {
     "hooks": {
       "pre-commit": "file-scan -p apikey-1234567890 ./**/**"
     }
   }
-``
-> Your commits will be declined by pre-commit hook if any secrets found
+```
 
 ## Tests
 
