@@ -1,5 +1,4 @@
 import { initLog } from "./log";
-import { Config } from "./cli";
 import { readFileAsync, isFile } from "./fs";
 
 const log = initLog("main");
@@ -8,6 +7,11 @@ export interface Match {
   file: string;
   lineNumber: number;
   line: string;
+}
+
+export interface Config {
+  pattern: RegExp;
+  files: string[];
 }
 
 function constructMatch(
@@ -29,6 +33,7 @@ function constructMatch(
   }
   return result;
 }
+
 async function matchPattern(
   file: string,
   pattern: RegExp
@@ -43,7 +48,7 @@ async function matchPattern(
   return result;
 }
 
-async function processFile(
+export async function processFile(
   pattern: RegExp,
   file: string
 ): Promise<Match | null> {
@@ -57,11 +62,4 @@ async function processFile(
     log(processFile.name, e);
   }
   return result;
-}
-
-export async function match(config: Config): Promise<Match[]> {
-  log(match.name, config.files);
-  const promises = config.files.map((f) => processFile(config.pattern, f));
-  const matches = await Promise.all(promises);
-  return matches.filter((m) => m) as Match[];
 }

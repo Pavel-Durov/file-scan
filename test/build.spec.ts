@@ -11,9 +11,12 @@ function assertDistDir(t: ExecutionContext) {
   t.true(isFile("./dist/README.md"));
   t.true(isDir("./dist/src"));
 }
-test("expected build and execute - exit with error code", (t) => {
+test.before((t) => {
   execSync("yarn build");
   assertDistDir(t);
+});
+
+test("expected build and execute - exit with error code", (t) => {
   const pkg = require("dist/package.json");
   const cmd = `cd dist && node ${pkg.bin["file-scan"]}  --pattern "version" ./package.json`;
   assertExec(
@@ -24,9 +27,7 @@ test("expected build and execute - exit with error code", (t) => {
   );
 });
 
-test.only("expected build and execute - exit with success code", (t) => {
-  execSync("yarn build");
-  assertDistDir(t);
+test("expected build and execute - exit with success code", (t) => {
   const pkg = require("dist/package.json");
   const cmd = `cd dist && node ${pkg.bin["file-scan"]}  --pattern "not-common-pattern-to-find" ./**/*/*`;
   assertExec(t, cmd, (str: string) => true, SUCCESS);

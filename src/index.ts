@@ -1,29 +1,38 @@
-#!/usr/bin/env node
+import * as glob from "glob";
+import { Config, Match, processFile } from "./match";
 
-import { parseArgs } from "./cli";
 import { initLog } from "./log";
-import { match, Match } from "./match";
-import { isEmpty } from "ramda";
-import { PROC_EXIST_ERROR_CODE, PROC_EXIST_SUCCESS_CODE } from "./const";
 
 const log = initLog("main");
 
-function existMatchFound(match: Match[]) {
-  for (const { file, lineNumber, line } of match) {
-    console.log(`${file} - [${lineNumber}] "${line}"`);
-  }
-  process.exit(PROC_EXIST_ERROR_CODE);
-}
-async function main() {
-  log(main.name);
-  const args = parseArgs();
-  log(main.name, { args });
-  const result = await match(args);
-  if (isEmpty(result)) {
-    process.exit(PROC_EXIST_SUCCESS_CODE);
-  } else {
-    existMatchFound(result);
-  }
+export { Config, Match };
+
+function getFilesByGlobAsync(globPattern: string): Promise<string[] | never> {
+  return new Promise((resolve, reject) => {
+    glob(globPattern, (err: Error | null, files?: string[]) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(files);
+      }
+    });
+  });
 }
 
-main();
+export async function scanFiles(
+  pattern: RegExp,
+  files: string[]
+): Promise<Match[]> {
+  log(scan.name, files);
+  const promises = files.map((f) => processFile(pattern, f));
+  const match = await Promise.all(promises);
+  return match.filter(Boolean) as Match[];
+}
+
+export async function scan(pattern: RegExp, glob: string): Promise<Match[]> {
+  log(scan.name, { pattern, glob });
+  const files = await getFilesByGlobAsync(glob);
+  const promises = files.map((f) => processFile(pattern, f));
+  const match = await Promise.all(promises);
+  return match.filter(Boolean) as Match[];
+}
